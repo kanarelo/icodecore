@@ -25,17 +25,6 @@ public abstract class BaseModel implements Serializable, iValidator, iDataOutput
 	
     public BaseModel() {}
 
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        getChangeSupport().addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        getChangeSupport().removePropertyChangeListener(listener);
-    }
-
     /**
      *
      * @return
@@ -103,12 +92,5 @@ public abstract class BaseModel implements Serializable, iValidator, iDataOutput
 
     public String toCSV() {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    /**
-     * @return the changeSupport
-     */
-    public PropertyChangeSupport getChangeSupport() {
-        return changeSupport;
     }
 }

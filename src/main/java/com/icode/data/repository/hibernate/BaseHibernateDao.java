@@ -13,6 +13,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.transform.DistinctRootEntityResultTransformer;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -188,7 +189,8 @@ public abstract class BaseHibernateDao<E extends BaseModel> extends HibernateDao
 	}
 	
 	private DetachedCriteria getCriterion() {
-		return null;
+		DetachedCriteria criteria = DetachedCriteria.forClass(this.clazz);
+		return criteria;
 	}
 
 	public E getUnique(Integer i) {
