@@ -188,7 +188,7 @@ public abstract class BaseHibernateDao<E extends BaseModel> extends HibernateDao
 		return this.getList(getCriterion(), startIndex, limit);
 	}
 	
-	private DetachedCriteria getCriterion() {
+	protected DetachedCriteria getCriterion() {
 		DetachedCriteria criteria = DetachedCriteria.forClass(this.clazz);
 		return criteria;
 	}

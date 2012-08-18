@@ -89,12 +89,12 @@ public class Commons<E> implements Cloneable {
         return generateHash(saltedPassword, Algorithm);
     }
 
-    public static boolean compare_passwords(String hashedPassword, String Password2) {
+    public static boolean compare_passwords(String hashedPassword, String password2) {
         // remember to use the same SALT value use used while storing password
         // for the first time.
-        String[] PassArgs = hashedPassword.split("\\$");
-        String hashedPassword2 = Commons.generateFullHash(PassArgs[0], PassArgs[1], Password2);
-        return hashedPassword2.equals(PassArgs[2]);
+        String[] passArgs = hashedPassword.split("\\$");
+        String hashedPassword2 = Commons.generateFullHash(passArgs[0], passArgs[1], password2);
+        return hashedPassword2.equals(passArgs[2]);
     }
 
     public static boolean isValidPassword(String password) {
