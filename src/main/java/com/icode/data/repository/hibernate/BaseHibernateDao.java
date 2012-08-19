@@ -13,12 +13,10 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.transform.DistinctRootEntityResultTransformer;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.icode.data.SearchWizard;
 import com.icode.data.domain.BaseModel;
 import com.icode.data.repository.BaseDao;
 
@@ -118,10 +116,6 @@ public abstract class BaseHibernateDao<E extends BaseModel> extends HibernateDao
 		log.trace("Deleting entity: " + entity);
 		this.getHibernateTemplate().delete(entity);
 		log.trace("Entity deleted.");
-	}
-	
-	public List<E> getListBySearchWizard(SearchWizard sw) {
-		return null;
 	}
 	
 	/**

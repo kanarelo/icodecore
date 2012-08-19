@@ -52,24 +52,4 @@ public abstract class UserHomeFilePropertySet extends FilePropertySet {
 		super.setProperties(FilePropertySet.loadPropertyMap(ResourceUtils
 				.getPropertiesFile(name)));
 	}
-
-	/**
-	 * Gets the {@link Boolean} value of a property.
-	 * 
-	 * @param propertyName
-	 * @return The value of the property as a {@link Boolean} or
-	 *         <code>null</code> if it is not set.
-	 * @deprecated Should use {@link #getPropertyAsBoolean(String, boolean)}
-	 *             instead
-	 */
-	@Deprecated
-	protected Boolean getPropertyAsBoolean(String propertyName) {
-		String value = getProperty(propertyName);
-		if (value == null)
-			return null;
-		else
-			return Boolean.parseBoolean(value);
-	}
-
-	// > STATIC FACTORY METHODS
 }

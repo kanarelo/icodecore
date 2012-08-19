@@ -10,7 +10,6 @@ import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.dao.DuplicateKeyException;
 
-import com.icode.data.SearchWizard;
 import com.icode.data.domain.BaseModel;
 import com.icode.exceptions.IllegalOrphanException;
 import com.icode.exceptions.NonexistentEntityException;
@@ -37,6 +36,4 @@ public interface BaseDao<E extends BaseModel> {
 	List<E> getList(String hqlQuery, Object... values);
 	//List but paginate
 	List<E> getList(String hqlQuery, int startIndex, int limit, Object... values);
-
-	List<E> getListBySearchWizard(SearchWizard sw);
 }
