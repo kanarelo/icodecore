@@ -14,7 +14,7 @@ public final class AppProperties extends UserHomeFilePropertySet {
 
 //> DEFAULT VALUES
 	/** Default value for {@link #KEY_DATABASE_CONFIG_PATH} */
-	private static final String DEFAULT_DATABASE_CONFIG_PATH = "h2.database.xml";
+	private static final String DEFAULT_DATABASE_CONFIG_PATH = "mysql.database.xml";
 	
 	/** Singleton instance of this class. */
 	private static AppProperties instance;
