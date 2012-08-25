@@ -24,8 +24,6 @@ import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.hibernate.classic.Validatable;
-
 import com.icode.validation.validators.annotation.Valid.ValidateIsValid;
 import com.icode.validation.validators.base.BasePropertyValidator;
 

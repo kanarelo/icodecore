@@ -36,4 +36,7 @@ public interface BaseDao<E extends BaseModel> {
 	List<E> getList(String hqlQuery, Object... values);
 	//List but paginate
 	List<E> getList(String hqlQuery, int startIndex, int limit, Object... values);
+	
+	//search
+	List<E> search(String keyword, String... columns);
 }
