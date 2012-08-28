@@ -14,83 +14,90 @@ import com.icode.validation.iValidator;
 import com.icode.validation.validators.annotation.Valid.ValidateModel;
 
 /**
- *
+ * 
  * @author Nes
- * @param 
+ * @param
  */
 @ValidateModel
 @SuppressWarnings("unchecked")
-public abstract class BaseModel implements Serializable, iValidator, iDataOutput {
+public abstract class BaseModel implements Serializable, iValidator,
+		iDataOutput {
 	private static final long serialVersionUID = 1L;
-	
-    public BaseModel() {}
 
-    /**
-     *
-     * @return
-     */
-    public String getMyName() {
-        return BaseModel.this.getClass().getName();
-    }
+	public BaseModel() {
+	}
 
-    public abstract Integer getId();
-        
-    public void validate() {
-        ValidationEngine.validate(this);
-    }
+	/**
+	 * 
+	 * @return
+	 */
+	public String getMyName() {
+		return BaseModel.this.getClass().getName();
+	}
 
-    /**
-     *
-     * @param propertyName
-     * @param propertyValue
-     * @param messages
-     */
-    public void validateProperty(String propertyName, Object propertyValue, iMessages messages) {
-        ValidationEngine.validateProperty(BaseModel.this.getClass(), propertyName, propertyValue, messages);
-    }
+	public abstract Integer getId();
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
-    }
+	public void validate() {
+		ValidationEngine.validate(this);
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BaseModel)) {
-            return false;
-        }
-        BaseModel other = (BaseModel) object;
-        if ((this.hashCode() == 0 && other.hashCode() != 0) || (this.hashCode() != 0 && this.hashCode() != (other.hashCode()))) {
-            return false;
-        }
-        return true;
-    }
+	/**
+	 * 
+	 * @param propertyName
+	 * @param propertyValue
+	 * @param messages
+	 */
+	public void validateProperty(String propertyName, Object propertyValue,
+			iMessages messages) {
+		ValidationEngine.validateProperty(BaseModel.this.getClass(),
+				propertyName, propertyValue, messages);
+	}
 
-    @Override
-    public String toString() {
-        return this.getClass().getName() + "[id=" + this.getId() + "]";
-    }
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		return hash;
+	}
 
-    public int compareTo(BaseModel other) {
-        return (this.hashCode() < other.hashCode() ? -1 : (this.hashCode() == other.hashCode() ? 0 : 1));
-    }
+	@Override
+	public boolean equals(Object object) {
+		if (!(object instanceof BaseModel)) {
+			return false;
+		}
+		BaseModel other = (BaseModel) object;
+		if ((this.hashCode() == 0 && other.hashCode() != 0)
+				|| (this.hashCode() != 0 && this.hashCode() != (other
+						.hashCode()))) {
+			return false;
+		}
+		return true;
+	}
 
-    public String toXML() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    private List<String> counterFL;
+	@Override
+	public String toString() {
+		return this.getClass().getName() + "[id=" + this.getId() + "]";
+	}
 
-    public String toJSON() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	public int compareTo(BaseModel other) {
+		return (this.hashCode() < other.hashCode() ? -1
+				: (this.hashCode() == other.hashCode() ? 0 : 1));
+	}
 
-    public String toXLS() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	public String toXML() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 
-    public String toCSV() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	private List<String> counterFL;
+
+	public String toJSON() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public String toXLS() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public String toCSV() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 }
