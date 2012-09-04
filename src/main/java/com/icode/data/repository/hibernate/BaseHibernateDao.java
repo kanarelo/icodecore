@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.search.BooleanQuery;
 import org.hibernate.NonUniqueObjectException;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
@@ -310,8 +311,8 @@ public abstract class BaseHibernateDao<E extends BaseModel> extends
 	public List<E> search(String keyword, String... columns) {
 		FullTextSession fullTextSession = Search
 				.getFullTextSession(getSession());
+		
 		Transaction tx = fullTextSession.beginTransaction();
-
 		QueryBuilder qb = fullTextSession.getSearchFactory()
 				.buildQueryBuilder().forEntity(clazz).get();
 
@@ -319,9 +320,9 @@ public abstract class BaseHibernateDao<E extends BaseModel> extends
 				.matching(keyword).createQuery();
 
 		// execute search
-		org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(query, clazz);
-		List<E> result = hibQuery
-				.list();
+		org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(
+				query, clazz);
+		List<E> result = hibQuery.list();
 
 		tx.commit();
 		getSession().close();
