@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.search.BooleanQuery;
+import org.hibernate.CacheMode;
 import org.hibernate.NonUniqueObjectException;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
@@ -311,15 +311,27 @@ public abstract class BaseHibernateDao<E extends BaseModel> extends
 	public List<E> search(String keyword, String... columns) {
 		FullTextSession fullTextSession = Search
 				.getFullTextSession(getSession());
-		
+
 		Transaction tx = fullTextSession.beginTransaction();
+		try {
+			fullTextSession.createIndexer(clazz).batchSizeToLoadObjects(25)
+					.cacheMode(CacheMode.NORMAL).threadsToLoadObjects(5)
+					.threadsForSubsequentFetching(20).startAndWait();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		QueryBuilder qb = fullTextSession.getSearchFactory()
 				.buildQueryBuilder().forEntity(clazz).get();
 
-		org.apache.lucene.search.Query query = qb.keyword().onFields(columns)
-				.matching(keyword).createQuery();
+		org.apache.lucene.search.Query query = 
+				qb.keyword()
+				.onFields(columns)
+				.ignoreFieldBridge()
+				.matching(keyword)
+				.createQuery();
 
-		// execute search
 		org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(
 				query, clazz);
 		List<E> result = hibQuery.list();
